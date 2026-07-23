@@ -26,7 +26,7 @@
   @font-face{font-family:'Montserrat';font-style:normal;font-weight:900;font-display:swap;
     src:url(/fonts/montserrat-latin-900-normal.woff2) format('woff2');
     unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
-  :root{
+  :root{--header-h:96px;
     --bg:#070B12; --text:#E7EAF0; --muted:#6E7A8C;
     --blue:#5B8AD1; --blue-bright:#A9C6F0; --ice:#7FA8DE;
     --panel:rgba(12,17,26,.55); --line:rgba(91,138,209,.28);
@@ -107,7 +107,8 @@
 
   /* content sections */
   main{position:relative;z-index:10;}
-  section.sec{min-height:100vh;min-height:100svh;display:flex;align-items:center;padding:0 clamp(20px,7vw,110px);
+  section.sec{min-height:100vh;min-height:100svh;display:flex;align-items:center;
+    padding:calc(var(--header-h) + 28px) clamp(20px,7vw,110px) calc(var(--header-h) + 28px);
     pointer-events:none;}
   section.sec .panel,.identity{pointer-events:auto;}
   .align-l{justify-content:flex-start;} .align-r{justify-content:flex-end;} .align-c{justify-content:center;}
@@ -224,7 +225,7 @@
     nav a{font-size:10px;letter-spacing:1px;padding:6px 0;text-shadow:0 1px 6px rgba(7,11,18,.9);}
     nav a .idx{display:none;}
     .brand{font-size:10px;text-shadow:0 1px 6px rgba(7,11,18,.9);}
-    section.sec{padding:112px clamp(18px,6vw,40px) 64px;}
+    section.sec{padding:calc(var(--header-h) + 20px) clamp(18px,6vw,40px) calc(var(--header-h) + 20px);}
     .panel{padding:22px 18px;}
     .pipe{flex-wrap:wrap;gap:7px;}
     .pipe .stage{flex:1 1 calc(50% - 7px);min-width:calc(50% - 7px);}
@@ -825,7 +826,15 @@
   }
   addEventListener('scroll',onScroll,{passive:true});
   var lastW=innerWidth;
+  var headerEl=document.querySelector('header');
+  function syncHeaderHeight(){
+    var h=Math.ceil(headerEl.getBoundingClientRect().height);
+    document.documentElement.style.setProperty('--header-h',h+'px');
+  }
+  syncHeaderHeight();
+  if(document.fonts&&document.fonts.ready){document.fonts.ready.then(syncHeaderHeight);}
   addEventListener('resize',function(){
+    syncHeaderHeight();
     if(innerWidth===lastW) return; // mobile URL-bar show/hide fires height-only resizes
     lastW=innerWidth;
     setFit();measure();applyView(Math.max(0,activeSec));
