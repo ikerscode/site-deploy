@@ -47,7 +47,7 @@
      browser rasterizes the sheet once per state and idles at 0% CPU/GPU. */
   #zoomA{position:absolute;inset:0;transform-origin:0 0;will-change:transform;
     transition:transform 1300ms cubic-bezier(.22,1,.36,1);}
-  #sheet svg{position:absolute;inset:0;width:100%;height:100%;display:block;}
+  #sheet svg{position:absolute;left:0;top:0;width:1600px;height:1000px;display:block;}
   #sheet text{font-family:'Montserrat',sans-serif;}
   .vignette{position:fixed;inset:0;z-index:1;pointer-events:none;
     background:radial-gradient(ellipse at 50% 45%,transparent 42%,rgba(7,11,18,.72) 100%);}
@@ -634,9 +634,9 @@
 
   <section id="work" class="sec align-l">
     <div class="panel">
-      <div class="kicker">01 / Fielded Systems</div>
+      <div class="kicker">01 / Independent Builds</div>
       <h2>Built &amp; Shipped</h2>
-      <p>Two systems I built solo, start to finish. Both are real tools, not demos.</p>
+      <p>Three projects I built solo, start to finish — two fielded tools, one from-scratch technical deep dive.</p>
       <div class="proj">
         <div class="meta">Python · Remote Sensing · Computer Vision</div>
         <h3>VANTAGE: Satellite Imagery Intelligence</h3>
@@ -646,6 +646,11 @@
         <div class="meta">Python · Cross-Platform Desktop</div>
         <h3>Gullwing: Local Systems Console</h3>
         <small>Runs fully offline on Windows, macOS, and Linux behind a mission-control HUD. Security audit, malware heuristics, tuning, benchmarking. Every change is reversible, and it shows you the exact command before it runs. No cloud, no account, no telemetry.</small>
+      </div>
+      <div class="proj">
+        <div class="meta">Python · PyTorch · Object Detection</div>
+        <h3>Luxnet: Real-Time Object Detector</h3>
+        <small>A real-time object detector built from scratch — reparameterizable convs, a CSP backbone, an anchor-free head with no NMS step. Trained end-to-end on the full COCO2017 set on a single 6GB laptop GPU. Matches a current YOLO release for speed on identical hardware; accuracy trails a full model since it skipped ImageNet pretraining on purpose — reported plainly, not rounded up.</small>
       </div>
       <a class="btn" href="https://github.com/ikerscode" target="_blank" rel="noopener">All repositories → github.com/ikerscode</a>
     </div>
@@ -726,8 +731,8 @@
       </div>
       <div class="proj">
         <div class="meta">Independent Builds</div>
-        <h3>VANTAGE · Gullwing</h3>
-        <small>Two real systems, built and shipped on my own.</small>
+        <h3>VANTAGE · Gullwing · Luxnet</h3>
+        <small>Three solo-built systems, from a self-hosted ISR platform to a real-time detector trained from scratch.</small>
       </div>
       <div class="tags"><span>Machine Learning</span><span>Distributed Systems</span><span>Remote Sensing</span></div>
     </div>
@@ -793,10 +798,9 @@
   function applyView(idx){
     var K=KF[idx];
     var cover=Math.max(innerWidth/VBW,innerHeight/VBH);
-    var offX=(VBW-innerWidth/cover)/2, offY=(VBH-innerHeight/cover)/2;
-    var sc=Math.max(0.2,K.s*FIT);
-    var tx=K.a[0]*innerWidth - sc*(K.f[0]-offX)*cover;
-    var ty=K.a[1]*innerHeight - sc*(K.f[1]-offY)*cover;
+    var sc=Math.max(0.2,cover*K.s*FIT);
+    var tx=K.a[0]*innerWidth - K.f[0]*sc;
+    var ty=K.a[1]*innerHeight - K.f[1]*sc;
     zoomA.style.transform='translate3d('+tx.toFixed(1)+'px,'+ty.toFixed(1)+'px,0) scale('+sc.toFixed(4)+')';
   }
 
