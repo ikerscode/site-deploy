@@ -56,10 +56,6 @@
       <a class="btn primary" href="mailto:liamnichele@icloud.com">Email me</a>
       <a class="btn" href="/cv/Liam-Nichele-CV.pdf">Download CV (PDF)</a>
     </div>
-    <figure class="strip">
-      <canvas id="spec" role="img" aria-label="Spectrogram of a bat hunt. Calls get faster and shorter from left to right."></canvas>
-      <figcaption><span>I send a call. I read the echo.</span><button class="btn send" id="send" type="button">Send a call</button></figcaption>
-    </figure>
   </div>
 </section>
 
@@ -250,14 +246,17 @@ ATT&amp;CK  : T1029, T1071, T1571, +2 more</pre>
 <section id="method">
   <div class="wide">
     <h2>How I work</h2>
-    <p class="lead">A hunting bat changes its call as it closes in: slow, long calls while searching, faster ones on approach, then a rapid terminal buzz. That is also how I run an engagement.</p>
-    <figure class="strip">
-      <canvas id="spec2" role="img" aria-label="Spectrogram of a bat hunt in three phases: search, approach and terminal buzz."></canvas>
+    <p class="lead">I work like a hunting bat: wide and slow at first, then faster and more precise as I close in.</p>
+    <figure class="hunt">
+      <div class="hunt-top" aria-hidden="true"><span>Search</span><span>Approach</span><span>Terminal buzz</span></div>
+      <canvas id="spec2" role="img" aria-label="Illustration of a bat hunt in three phases. Search: slow, long calls. Approach: faster calls. Terminal buzz: a rapid burst."></canvas>
+      <div class="hunt-bottom" aria-hidden="true"><span>recon</span><span>enumeration</span><span>action</span></div>
+      <figcaption>I send a call. I read the echo.</figcaption>
     </figure>
     <div class="phases">
-      <div><h3>Search</h3><span class="muted">Recon and scoping</span><p>Read the scope and rules of engagement. Passive first, then active. Map what exists before touching it.</p></div>
-      <div><h3>Approach</h3><span class="muted">Enumeration and analysis</span><p>Services, versions, users, paths. Work out what is exploitable and why.</p></div>
-      <div><h3>Terminal buzz</h3><span class="muted">Action and report</span><p>Short and precise, only inside scope. Then write it up so someone else can reproduce and fix it.</p></div>
+      <p><strong>Search.</strong> Read the scope and rules of engagement. Passive first, then active. Map what exists before touching it.</p>
+      <p><strong>Approach.</strong> Services, versions, users, paths. Work out what is exploitable and why.</p>
+      <p><strong>Terminal buzz.</strong> Short and precise, only inside scope. Then write it up so someone else can reproduce and fix it.</p>
     </div>
     <div class="rules">
       <h3>Rules I work by</h3>
