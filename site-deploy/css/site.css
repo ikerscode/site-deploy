@@ -116,6 +116,11 @@ details p{margin:var(--s2) 0 var(--s3);font-size:1rem;color:var(--ink)}
 .spec path{fill:none;vector-effect:non-scaling-stroke;stroke:var(--accent)}
 .spec .l0{stroke-width:1.8;opacity:.95}.spec .l1{stroke-width:1.1;opacity:.4}.spec .l2{stroke-width:1.1;opacity:.18}
 .spec .b{stroke:var(--muted);stroke-width:1;stroke-dasharray:3 4;opacity:.55;vector-effect:non-scaling-stroke}
+/* Each call lights up in turn at the rhythm of the hunt (slow, faster, buzz), then the cycle repeats. */
+.spec .call{opacity:.28;animation:call 12.7s linear infinite}
+@keyframes call{0%{opacity:.28}.6%{opacity:1}6%{opacity:.28}100%{opacity:.28}}
+.spec .d0{animation-delay:0.00s}.spec .d1{animation-delay:0.62s}.spec .d2{animation-delay:1.24s}.spec .d3{animation-delay:1.86s}.spec .d4{animation-delay:2.48s}.spec .d5{animation-delay:3.10s}.spec .d6{animation-delay:3.72s}.spec .d7{animation-delay:4.28s}.spec .d8{animation-delay:4.76s}.spec .d9{animation-delay:5.19s}.spec .d10{animation-delay:5.57s}.spec .d11{animation-delay:5.90s}.spec .d12{animation-delay:6.19s}.spec .d13{animation-delay:6.44s}.spec .d14{animation-delay:6.67s}.spec .d15{animation-delay:6.86s}.spec .d16{animation-delay:6.93s}.spec .d17{animation-delay:7.00s}.spec .d18{animation-delay:7.07s}.spec .d19{animation-delay:7.14s}.spec .d20{animation-delay:7.21s}.spec .d21{animation-delay:7.28s}.spec .d22{animation-delay:7.35s}.spec .d23{animation-delay:7.42s}.spec .d24{animation-delay:7.49s}.spec .d25{animation-delay:7.56s}.spec .d26{animation-delay:7.63s}.spec .d27{animation-delay:7.70s}.spec .d28{animation-delay:7.77s}.spec .d29{animation-delay:7.84s}.spec .d30{animation-delay:7.91s}.spec .d31{animation-delay:7.98s}.spec .d32{animation-delay:8.05s}.spec .d33{animation-delay:8.12s}.spec .d34{animation-delay:8.19s}.spec .d35{animation-delay:8.26s}.spec .d36{animation-delay:8.33s}.spec .d37{animation-delay:8.40s}.spec .d38{animation-delay:8.47s}.spec .d39{animation-delay:8.54s}.spec .d40{animation-delay:8.61s}.spec .d41{animation-delay:8.68s}.spec .d42{animation-delay:8.75s}.spec .d43{animation-delay:8.82s}.spec .d44{animation-delay:8.89s}.spec .d45{animation-delay:8.96s}.spec .d46{animation-delay:9.03s}.spec .d47{animation-delay:9.10s}.spec .d48{animation-delay:9.17s}.spec .d49{animation-delay:9.24s}.spec .d50{animation-delay:9.31s}.spec .d51{animation-delay:9.38s}.spec .d52{animation-delay:9.45s}.spec .d53{animation-delay:9.52s}.spec .d54{animation-delay:9.59s}.spec .d55{animation-delay:9.66s}
+@media (prefers-reduced-motion:reduce){.spec .call{animation:none;opacity:1}}
 .hunt figcaption{margin-top:var(--s3);color:var(--muted);font-style:italic;font-size:.875rem}
 .phases{display:grid;grid-template-columns:34fr 36fr 30fr;gap:var(--s5);margin-top:var(--s5)}
 .phases p{font-size:1rem;color:var(--ink)}
@@ -171,9 +176,6 @@ footer .wide{display:flex;justify-content:space-between;gap:var(--s4);flex-wrap:
   .phases{grid-template-columns:1fr;gap:var(--s3)}
   .hunt-top span{font-size:.9375rem;padding-left:var(--s1);padding-right:0}
     .spec{display:block;width:100%;height:140px;background:var(--exhibit);border-radius:3px}
-.spec path{fill:none;vector-effect:non-scaling-stroke;stroke:var(--accent)}
-.spec .l0{stroke-width:1.8;opacity:.95}.spec .l1{stroke-width:1.1;opacity:.4}.spec .l2{stroke-width:1.1;opacity:.18}
-.spec .b{stroke:var(--muted);stroke-width:1;stroke-dasharray:3 4;opacity:.55;vector-effect:non-scaling-stroke}
   .case dl{grid-template-columns:1fr;gap:0} .case dd{margin-bottom:var(--s3)}
   .wide{padding:0 var(--s4)}
   /* findings as stacked blocks */
@@ -193,6 +195,7 @@ footer .wide{display:flex;justify-content:space-between;gap:var(--s4);flex-wrap:
 @media print{
   :root{--paper:#fff;--ink:#000;--muted:#333;--rule:#aaa;--accent:#000;--exhibit:#f1f1f1;--sev-high:#7a1a10;--sev-med:#6b4300}
   header,.skip,.after .btn,.actions,.back,.contact-list a span{display:none}
+  .spec .call{animation:none;opacity:1}
   body{background:#fff;color:#000;font-size:11pt;line-height:1.5}
   .wide,.rpt .wide{max-width:none;padding:0}
   section{padding-top:20pt}
