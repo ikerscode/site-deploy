@@ -4,6 +4,8 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="color-scheme" content="light dark" />
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#F2F3EF" />
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#121417" />
 <title>Penetration test report: ICS simulator | Liam Nichele</title>
 <meta name="description" content="Sample penetration test report on my own water-plant ICS simulator: scope, method, four findings with CVSS vectors, evidence, reproduction steps, remediation and retests." />
 <link rel="canonical" href="https://liamnichele.ikerxen.workers.dev/reports/ics-sim" />
@@ -59,11 +61,11 @@
 <p>The main lesson is that <strong>no single control covers everything</strong>. A range check on the PLC stopped the Oldsmar-style setpoint attack but did nothing against reprogramming or replayed telemetry. A Modbus firewall stopped the flood and the reprogramming but not an attack from an allowed host. The SIS prevented every hazard it has a sensor for, but did so by shutting the outlet, which turned a quality incident into a supply outage.</p>
 <div class="tblwrap">
 <table class="findings">
-  <caption>Summary of findings. Retest: Fixed means the hazard no longer occurred, Mitigated means damage was reduced, Detected only means an alert fired but the hazard still happened.</caption>
+  <caption>Summary of findings. Retest: Fixed means the hazard no longer occurred, Mitigated means damage was reduced, Detected only means an alert fired but the hazard still happened. Where two controls were tested, both results are listed.</caption>
   <thead><tr><th scope="col">ID</th><th scope="col">Finding</th><th scope="col">CVSS 3.1</th><th scope="col">Retest</th></tr></thead>
   <tbody>
     <tr><td class="id">F1</td><td class="title"><a href="#f1">PLC program can be rewritten from an unlisted host</a></td><td data-label="CVSS"><span class="sev high">8.2 High</span><span class="vec">AV:A/AC:L/PR:N/UI:N/S:C/C:N/I:H/A:L</span></td><td data-label="Retest">Fixed (firewall); detected only (CRC monitor)</td></tr>
-    <tr><td class="id">F2</td><td class="title"><a href="#f2">Operator view can be replayed while the process is attacked</a></td><td data-label="CVSS"><span class="sev high">8.0 High</span><span class="vec">AV:A/AC:H/PR:N/UI:N/S:C/C:N/I:H/A:H</span></td><td data-label="Retest">Mitigated (SIS); detected only (integrity check)</td></tr>
+    <tr><td class="id">F2</td><td class="title"><a href="#f2">Operator view can be replayed while the process is attacked</a></td><td data-label="CVSS"><span class="sev high">8.0 High</span><span class="vec">AV:A/AC:H/PR:N/UI:N/S:C/C:N/I:H/A:H</span></td><td data-label="Retest">Detected (10 min), damage limited (SIS)</td></tr>
     <tr><td class="id">F3</td><td class="title"><a href="#f3">Setpoint writes accepted without range validation</a></td><td data-label="CVSS"><span class="sev high">7.7 High</span><span class="vec">AV:N/AC:L/PR:L/UI:N/S:C/C:N/I:H/A:N</span></td><td data-label="Retest">Fixed (engineering limits)</td></tr>
     <tr><td class="id">F4</td><td class="title"><a href="#f4">Modbus flood from the IT zone exhausts the PLC</a></td><td data-label="CVSS"><span class="sev med">6.5 Medium</span><span class="vec">AV:A/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H</span></td><td data-label="Retest">Fixed (firewall)</td></tr>
   </tbody>

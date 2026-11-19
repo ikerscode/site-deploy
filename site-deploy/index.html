@@ -4,6 +4,8 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="color-scheme" content="light dark" />
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#F2F3EF" />
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#121417" />
 <title>Liam Nichele, junior penetration tester</title>
 <meta name="description" content="Junior penetration tester in Italy, graduating 2027. A published sample pentest report on an ICS simulator, four attack-side security projects and drone-link intrusion detection research." />
 <link rel="canonical" href="https://liamnichele.ikerxen.workers.dev/" />
@@ -73,7 +75,7 @@
           <tr><td class="id">F1</td><td class="title">PLC program can be rewritten from an unlisted host</td>
             <td data-label="CVSS"><span class="sev high">8.2 High</span><span class="vec">AV:A/AC:L/PR:N/UI:N/S:C/C:N/I:H/A:L</span></td><td data-label="Retest">Fixed</td></tr>
           <tr><td class="id">F2</td><td class="title">Operator view can be replayed while the process is attacked</td>
-            <td data-label="CVSS"><span class="sev high">8.0 High</span><span class="vec">AV:A/AC:H/PR:N/UI:N/S:C/C:N/I:H/A:H</span></td><td data-label="Retest">Mitigated</td></tr>
+            <td data-label="CVSS"><span class="sev high">8.0 High</span><span class="vec">AV:A/AC:H/PR:N/UI:N/S:C/C:N/I:H/A:H</span></td><td data-label="Retest">Detected (10 min), damage limited</td></tr>
           <tr><td class="id">F3</td><td class="title">Setpoint writes accepted without range validation</td>
             <td data-label="CVSS"><span class="sev high">7.7 High</span><span class="vec">AV:N/AC:L/PR:L/UI:N/S:C/C:N/I:H/A:N</span></td><td data-label="Retest">Fixed</td></tr>
           <tr><td class="id">F4</td><td class="title">Modbus flood from the IT zone exhausts the PLC</td>
@@ -95,7 +97,7 @@
 
     <article class="case">
       <div>
-        <p class="when"><span>14 to 19 Nov 2026</span><span>Industrial control systems</span></p>
+        <ul class="when"><li><time datetime="2026-11-14">14 Nov</time> to <time datetime="2026-11-19">19 Nov 2026</time></li><li>Industrial control systems</li></ul>
         <h3>ICS attack simulator</h3>
         <p class="sum">A simulated water plant attacked by eight ATT&amp;CK for ICS scenarios.</p>
         <dl>
@@ -126,7 +128,7 @@ mitigations: eng_limits
 
     <article class="case">
       <div>
-        <p class="when"><span>18 Nov 2026</span><span>Drone command-link detection</span></p>
+        <ul class="when"><li>Rules from <time datetime="2026-10-29">29 Oct 2026</time></li><li>Demo built <time datetime="2026-11-18">18 Nov 2026</time></li><li>Drone command-link detection</li></ul>
         <h3>MAVLink NIDS demo</h3>
         <p class="sum">Custom Suricata rules for a drone command link, compared with the stock rule set.</p>
         <dl>
@@ -156,7 +158,7 @@ mitigations: eng_limits
 
     <article class="case">
       <div>
-        <p class="when"><span>14 to 18 Nov 2026</span><span>Attacker behaviour</span></p>
+        <ul class="when"><li><time datetime="2026-11-14">14 Nov</time> to <time datetime="2026-11-18">18 Nov 2026</time></li><li>Attacker behaviour</li></ul>
         <h3>Honeypot network</h3>
         <p class="sum">SSH, Telnet, HTTP and banner sensors that look vulnerable and send signed events to a collector.</p>
         <dl>
@@ -187,7 +189,7 @@ exploit attempts: 1074 of 1230 HTTP requests</pre>
 
     <article class="case">
       <div>
-        <p class="when"><span>14 to 18 Nov 2026</span><span>Malware analysis</span></p>
+        <ul class="when"><li><time datetime="2026-11-14">14 Nov</time> to <time datetime="2026-11-18">18 Nov 2026</time></li><li>Malware analysis</li></ul>
         <h3>Malware lab</h3>
         <p class="sum">Static analysis, then detonation in a no-network Docker sandbox, with indicators, ATT&amp;CK mapping and YARA output.</p>
         <dl>
@@ -274,11 +276,11 @@ ATT&amp;CK  : T1029, T1071, T1571, +2 more</pre>
     <h2>Toolkit</h2>
     <p class="lead">Each item links to where I used it.</p>
     <div class="cols">
-      <div><h3>Attack and recon</h3><ul>
+      <div><h3>Protocols and frameworks</h3><ul>
         <li>ATT&amp;CK and ATT&amp;CK for ICS: <a href="https://github.com/ikerscode/ics-sim">ics-sim</a></li>
         <li>Modbus/TCP and MAVLink: <a href="https://github.com/ikerscode/mavlink-nids-demo">mavlink-nids-demo</a></li>
         <li>tshark and scapy: <a href="https://github.com/ikerscode/ai-ids">ai-ids</a></li>
-        <li>Training: Hack The Box</li>
+        <li>CVSS 3.1 scoring: <a href="/reports/ics-sim.html">sample report</a></li>
       </ul></div>
       <div><h3>Detection and analysis</h3><ul>
         <li>Suricata rules: <a href="https://github.com/ikerscode/mavlink-nids-demo">mavlink-nids-demo</a></li>

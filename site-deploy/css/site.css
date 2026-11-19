@@ -86,7 +86,7 @@ td.id{font-family:var(--mono);font-size:.8125rem;white-space:nowrap;padding-top:
 /* case rows */
 .case{display:grid;grid-template-columns:55fr 45fr;gap:var(--s5) var(--s7);padding:var(--s7) 0;border-top:1px solid var(--rule)}
 .case:first-of-type{border-top:0;padding-top:var(--s4)}
-.case .when{color:var(--muted);font-size:.875rem;display:flex;flex-wrap:wrap;gap:var(--s1) var(--s4);margin-bottom:var(--s1)}
+.case .when{list-style:none;color:var(--muted);font-size:.875rem;display:flex;flex-wrap:wrap;gap:var(--s1) var(--s4);margin-bottom:var(--s1)}
 .case h3{margin-bottom:var(--s2)}
 .case .sum{margin-bottom:var(--s4)}
 .case dl{display:grid;grid-template-columns:5.5rem 1fr;gap:var(--s2) var(--s4);font-size:1rem;line-height:1.55}
@@ -155,6 +155,7 @@ footer .wide{display:flex;justify-content:space-between;gap:var(--s4);flex-wrap:
 .finding .vec{margin-bottom:var(--s3)}
 .back{display:inline-block;margin-top:var(--s6)}
 
+@media (min-width:641px){table.findings td:nth-child(3){white-space:nowrap}}
 @media (max-width:900px){
   .case{grid-template-columns:1fr;gap:var(--s4)}
   .cols{grid-template-columns:1fr;gap:var(--s6)}
