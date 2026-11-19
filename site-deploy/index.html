@@ -1,297 +1,320 @@
 <!DOCTYPE html>
-<html lang="en" class="no-js">
+<html lang="en">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<meta name="theme-color" content="#0d0d0f" />
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none';" />
-<title>Liam Nichele | Penetration Tester</title>
-<meta name="description" content="Liam Nichele, junior penetration tester heading for red team. Attack-side security projects, a sample pentest report on an ICS simulator, and drone-link intrusion detection research. Graduating 2027, based in Italy." />
-<meta property="og:title" content="Liam Nichele | Penetration Tester" />
-<meta property="og:description" content="Junior penetration tester heading for red team. Projects, a sample pentest report and research. Looking for a first role or internship in Europe." />
+<meta name="color-scheme" content="light dark" />
+<title>Liam Nichele, junior penetration tester</title>
+<meta name="description" content="Junior penetration tester in Italy, graduating 2027. A published sample pentest report on an ICS simulator, four attack-side security projects and drone-link intrusion detection research." />
+<link rel="canonical" href="https://liamnichele.ikerxen.workers.dev/" />
+<meta property="og:title" content="Liam Nichele, junior penetration tester" />
+<meta property="og:description" content="Sample pentest report, four security projects and drone-link detection research. Graduating 2027, based in Italy." />
 <meta property="og:type" content="website" />
+<meta property="og:url" content="https://liamnichele.ikerxen.workers.dev/" />
+<meta property="og:image" content="https://liamnichele.ikerxen.workers.dev/og.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:card" content="summary_large_image" />
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-<link rel="preload" href="/fonts/inter-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin />
-<link rel="preload" href="/fonts/anton-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="/fonts/source-serif-4-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin />
 <link rel="stylesheet" href="/css/site.css" />
 <script src="/js/site.js" defer></script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
-<canvas id="cave" aria-hidden="true"></canvas>
 
 <header>
-  <div class="wrap">
+  <div class="wide">
     <a class="brand" href="#top" aria-label="Liam Nichele, top of page">
       <svg viewBox="0 0 60 36" aria-hidden="true"><path d="M30 6 32.5 1.5 33.5 9Q38 8 43 4Q52 3 58 12Q54 11 50 13Q50 18 46 22Q44 18 40 19Q39 25 35 30Q33 22 30 34Q27 22 25 30Q21 25 20 19Q16 18 14 22Q10 18 10 13Q6 11 2 12Q8 3 17 4Q22 8 26.5 9L27.5 1.5Z"/></svg>
       Liam Nichele
     </a>
     <nav aria-label="Sections">
+      <a href="#report">Report</a>
       <a href="#projects">Projects</a>
-      <a href="#report">Sample report</a>
       <a href="#research">Research</a>
-      <a href="#method">Method</a>
-      <a href="#contact">Contact</a>
+      <a class="keep" href="#contact">Contact</a>
     </nav>
   </div>
 </header>
 
 <main id="main">
-<div class="wrap">
 
-  <div class="hero" id="top">
-    <p class="eyebrow"><b>$</b> penetration tester &middot; heading for red team</p>
-    <h1>I send a call.<span class="l2">I read the echo.</span></h1>
-    <p class="lede">I am a junior penetration tester. I learn attacks by building the tools that catch them, so I know what both the attacker and the defender see.</p>
-    <p class="lede">I am early in my career, I train on Hack The Box and I document everything I do. I am looking for a team that will take a chance on me.</p>
-    <div class="facts-bar">
-      <div><b>education</b>BSc (Hons) Computing, University of Derby</div>
-      <div><b>graduating</b>2027</div>
-      <div><b>location</b>Italy, open to relocate across Europe</div>
-      <div><b>looking for</b>Junior pentest role or internship</div>
+<section class="hero" id="top">
+  <div class="wide">
+    <h1>Liam Nichele</h1>
+    <p class="role">Junior penetration tester</p>
+    <p class="line">I build the systems I attack, then write the report a defender can act on.</p>
+    <ul class="facts">
+      <li>BSc (Hons) Computing, University of Derby, graduating 2027</li>
+      <li>Based in Italy, open to relocating in Europe</li>
+      <li>Looking for a junior pentest role or internship; red team is the long-term goal</li>
+    </ul>
+    <div class="actions">
+      <a class="btn primary" href="mailto:liamnichele@icloud.com">Email me</a>
+      <a class="btn" href="/cv/Liam-Nichele-CV.pdf">Download CV (PDF)</a>
     </div>
-    <div class="cta">
-      <a class="btn solid" href="mailto:liamnichele@icloud.com">Email me</a>
-      <a class="btn" href="#projects">See projects</a>
-      <a class="btn" href="/cv/Liam-Nichele-CV.pdf">CV (PDF)</a>
-    </div>
-    <div class="fxbar">
-      <span>Optional effect:</span>
-      <button class="btn small" id="ping-btn" type="button">Send a call</button>
-      <button class="btn small" id="fx-btn" type="button" aria-pressed="true">Effects: on</button>
-    </div>
+    <figure class="strip">
+      <canvas id="spec" role="img" aria-label="Spectrogram of a bat hunt. Calls get faster and shorter from left to right."></canvas>
+      <figcaption><span>I send a call. I read the echo.</span><button class="btn send" id="send" type="button">Send a call</button></figcaption>
+    </figure>
   </div>
+</section>
 
-  <section id="projects">
-    <div class="sec-h"><h2>Projects</h2></div>
-    <p class="sec-sub">Four projects, strongest first. Each one starts from the attacker's side and ends with what a defender sees. All are public and run locally.</p>
-
-    <div class="grid">
-      <article class="card echo reveal">
-        <div class="head">
-          <div class="meta">Nov 2026 &middot; drone command-link detection</div>
-          <h3><a href="https://github.com/ikerscode/mavlink-nids-demo">MAVLink NIDS demo</a></h3>
-          <p class="one">Replays drone command-link captures through Suricata and compares the stock rules with 35 custom MAVLink rules.</p>
-        </div>
-        <dl>
-          <div><dt>attacker's view</dt><dd>On a link without message signing, an attacker can <strong>flood it, inject a command</strong> that appears to come from the ground station, or <strong>feed fake GPS positions</strong>. The rules match those payload patterns.</dd></div>
-          <div><dt>defender's view</dt><dd>Rules are written from the protocol specification. Replay is offline, so the demo never sends attack traffic.</dd></div>
-          <div><dt>result and limit</dt><dd>On the four bundled test captures the stock Emerging Threats rules raised no alerts and the custom rules fired as expected. The captures are synthetic and the rules hard-code the lab addresses. Testing on live traffic is my research project.</dd></div>
-        </dl>
-        <figure class="cap">
-          <figcaption>rules/custom/mavlink.rules, one rule, wrapped and trimmed</figcaption>
-<pre><b>alert</b> udp !10.77.0.20 any -> any any (
-  msg:"SG-MAVLINK injection: COMMAND_LONG (v2)
-       from a source that is not the ground station";
-  content:"|fd|"; startswith;
-  content:"|4c 00 00|"; offset:7; depth:3;
-  classtype:attempted-admin; <i>sid:9100201</i>; ...)</pre>
-        </figure>
-        <div class="foot"><span>Suricata &middot; MAVLink &middot; Docker &middot; Python</span><a class="go" href="https://github.com/ikerscode/mavlink-nids-demo">View repo &rarr;</a></div>
-      </article>
-
-      <article class="card echo reveal">
-        <div class="head">
-          <div class="meta">Nov 2026 &middot; attacker behaviour</div>
-          <h3><a href="https://github.com/ikerscode/honeypot-net">Honeypot network</a></h3>
-          <p class="one">SSH, Telnet, HTTP and banner sensors that look vulnerable, record what is tried against them and send HMAC-signed events to a collector.</p>
-        </div>
-        <dl>
-          <div><dt>attacker's view</dt><dd>Shows how automated attackers behave: <strong>default-credential lists, password spraying and exploit probes</strong> for known CVEs in web frameworks and home routers, grouped into campaigns.</dd></div>
-          <div><dt>defender's view</dt><dd>Sensors have no route out, events are signed with replay protection, and nothing real ever executes.</dd></div>
-          <div><dt>result and limit</dt><dd>On the built-in 14-day traffic simulator it separates 5 campaigns and flags 1,074 of 1,230 HTTP requests as exploit attempts. It has never been exposed to the internet, so these numbers show the analysis works, not what real attackers do.</dd></div>
-        </dl>
-        <figure class="cap">
-          <figcaption>python -m honeypot analyze (simulated data)</figcaption>
-<pre><b>auth attempts:</b> 6958 from 305 IPs; brute-force flagged: 112
-<b>campaigns:</b> 5
-  C01 IoT botnet (Mirai-style)         175 IPs    910 attempts
-  C02 botnet credential stuffing       112 IPs   5732 attempts
-<b>exploit attempts:</b> 1074 of 1230 HTTP requests
-  by CVE: CVE-2018-10561(98), CVE-2018-10562(98), ...</pre>
-        </figure>
-        <div class="foot"><span>Python &middot; SQLite &middot; Docker &middot; HMAC</span><a class="go" href="https://github.com/ikerscode/honeypot-net">View repo &rarr;</a></div>
-      </article>
-
-      <article class="card echo reveal">
-        <div class="head">
-          <div class="meta">Nov 2026 &middot; malware analysis</div>
-          <h3><a href="https://github.com/ikerscode/malware-lab">Malware lab</a></h3>
-          <p class="one">Static analysis, then detonation in a no-network, read-only Docker sandbox watched with strace. It extracts indicators, maps behaviour to ATT&amp;CK and writes a YARA rule and a report.</p>
-        </div>
-        <dl>
-          <div><dt>attacker's view</dt><dd>Reads what a beacon does: <strong>callbacks with jitter on a non-standard port</strong>, DNS lookups for command-and-control, persistence.</dd></div>
-          <div><dt>defender's view</dt><dd>Output is IOCs, ATT&amp;CK techniques and a YARA rule you can deploy, in Markdown, HTML, JSON and STIX 2.1.</dd></div>
-          <div><dt>result and limit</dt><dd>The safe C2 training specimen scores 24 (benign) on static analysis alone and 94 (malicious) after detonation, which is why the sandbox exists. The lab ships training simulators, not real malware.</dd></div>
-        </dl>
-        <figure class="cap">
-          <figcaption>python -m malwarelab analyze specimens/c2_beacon.py</figcaption>
-<pre>dynamic   : yes, 5.426 s, 58 events
-verdict   : <b>MALICIOUS</b>  category=backdoor-c2  score=94
-  [high  ] c2/dynamic: Beaconing to 203.0.113.50:8443:
-           every 0.853 s, jitter 5.8%
-  [medium] c2/static: YARA C2_Beacon_Loop
-ATT&amp;CK    : T1029, T1071, T1071.001, T1071.004, T1571
-IOCs      : 6</pre>
-        </figure>
-        <div class="foot"><span>Python &middot; YARA &middot; strace &middot; Docker</span><a class="go" href="https://github.com/ikerscode/malware-lab">View repo &rarr;</a></div>
-      </article>
-
-      <article class="card echo reveal">
-        <div class="head">
-          <div class="meta">Nov 2026 &middot; industrial control systems</div>
-          <h3><a href="https://github.com/ikerscode/ics-sim">ICS attack simulator</a></h3>
-          <p class="one">A simulated water plant with a PLC, a separate safety system and Modbus/TCP, attacked by eight scenarios mapped to ATT&amp;CK for ICS.</p>
-        </div>
-        <dl>
-          <div><dt>attacker's view</dt><dd>Starts from the attack: <strong>raise the caustic setpoint through a remote session, replay the operator's view while closing a valve, rewrite PLC logic, flood Modbus</strong>.</dd></div>
-          <div><dt>defender's view</dt><dd>Seven switchable mitigations. Every scenario is re-run with each one to see what actually helps.</dd></div>
-          <div><dt>result and limit</dt><dd>405 runs over 5 seeds show no single control covers everything. A range check stops the Oldsmar-style write but not logic changes or replayed telemetry. The physics is simplified and the operator is scripted. <a href="/reports/ics-sim.html">Read the sample pentest report on it.</a></dd></div>
-        </dl>
-        <figure class="cap">
-          <figcaption>python -m icssim run-scenario oldsmar --fast</figcaption>
-<pre>mitigations: none -> outcome: <b>hazard occurred</b>
-  quality compliance 18.82%
-  hazards: caustic_overdose, ph_out_of_range
-
-mitigations: eng_limits -> outcome: <b>prevented</b>
-  eng_limits  detected after 1.0 min:
-  Engineering limit rejected write
-  NAOH_SP=11100 ppm (range 0-200)</pre>
-        </figure>
-        <div class="foot"><span>Python &middot; Modbus/TCP &middot; FastAPI &middot; ATT&amp;CK for ICS</span><a class="go" href="https://github.com/ikerscode/ics-sim">View repo &rarr;</a></div>
-      </article>
-    </div>
-
-    <div class="more reveal">
-      <h3>Also built</h3>
-      <ul class="list">
-        <li><a href="https://github.com/ikerscode/threat-intel">threat-intel</a><span>Pulls public feeds (CISA KEV, EPSS, ATT&amp;CK, C2 infrastructure, ransomware groups, phishing), correlates them and answers pivot queries. Works offline from fixtures.</span></li>
-        <li><a href="https://github.com/ikerscode/ai-ids">ai-ids</a><span>Machine-learning intrusion detection that explains every alert. Evaluated on CIC-IDS2017, and the README says plainly where it misses unseen attack families.</span></li>
-        <li><a href="https://github.com/ikerscode/purple-path">purple-path</a><span>A browser game that teaches ethical hacking terms, one per level, with every lesson sourced and defence-first.</span></li>
-        <li><a href="https://github.com/ikerscode/seclab">seclab</a><span>A portal that starts and monitors the labs above, with a scripted demo that follows one incident across them.</span></li>
-        <li><a href="https://github.com/ikerscode/Gullwing">Gullwing</a><span>An offline Windows, macOS and Linux console for security audit and tuning. Every change is reversible and shown as the exact command first.</span></li>
-      </ul>
-    </div>
-  </section>
-
-  <section id="report">
-    <div class="sec-h"><h2>Sample pentest report</h2></div>
-    <p class="sec-sub">The report is what a pentester actually delivers, so here is one. The target is <strong>my own ICS simulator</strong>, nothing else. It has an executive summary, scope and rules of engagement, four findings with CVSS scores, evidence from real runs, reproduction steps, remediation and a retest for each.</p>
-    <div class="tblwrap reveal">
-      <table class="tbl">
-        <thead><tr><th>ID</th><th>Finding</th><th>CVSS 3.1</th><th>Fix verified</th></tr></thead>
+<section id="report">
+  <div class="wide">
+    <h2>Sample penetration test report</h2>
+    <p class="lead">A scoped assessment of my own ICS simulator: scope, method, four findings with CVSS vectors, evidence from real runs, reproduction steps, remediation and a retest for each.</p>
+    <div class="tblwrap">
+      <table class="findings">
+        <caption>Findings in the ICS simulator report, rated with CVSS 3.1.</caption>
+        <thead><tr><th scope="col">ID</th><th scope="col">Finding</th><th scope="col">CVSS 3.1</th><th scope="col">Retest</th></tr></thead>
         <tbody>
-          <tr><td>F1</td><td>PLC program can be rewritten from an unlisted host</td><td><span class="sev">8.2 High</span></td><td>Firewall allowlist: prevented</td></tr>
-          <tr><td>F2</td><td>Operator view can be replayed while the process is attacked</td><td><span class="sev">8.0 High</span></td><td>Integrity check detects at 10 min; SIS limits damage</td></tr>
-          <tr><td>F3</td><td>Setpoint writes accepted without range validation</td><td><span class="sev">7.7 High</span></td><td>Engineering limits: prevented</td></tr>
-          <tr><td>F4</td><td>Modbus flood from the IT zone exhausts the PLC</td><td><span class="sev med">6.5 Medium</span></td><td>Firewall allowlist: prevented</td></tr>
+          <tr><td class="id">F1</td><td class="title">PLC program can be rewritten from an unlisted host</td>
+            <td data-label="CVSS"><span class="sev high">8.2 High</span><span class="vec">AV:A/AC:L/PR:N/UI:N/S:C/C:N/I:H/A:L</span></td><td data-label="Retest">Fixed</td></tr>
+          <tr><td class="id">F2</td><td class="title">Operator view can be replayed while the process is attacked</td>
+            <td data-label="CVSS"><span class="sev high">8.0 High</span><span class="vec">AV:A/AC:H/PR:N/UI:N/S:C/C:N/I:H/A:H</span></td><td data-label="Retest">Mitigated</td></tr>
+          <tr><td class="id">F3</td><td class="title">Setpoint writes accepted without range validation</td>
+            <td data-label="CVSS"><span class="sev high">7.7 High</span><span class="vec">AV:N/AC:L/PR:L/UI:N/S:C/C:N/I:H/A:N</span></td><td data-label="Retest">Fixed</td></tr>
+          <tr><td class="id">F4</td><td class="title">Modbus flood from the IT zone exhausts the PLC</td>
+            <td data-label="CVSS"><span class="sev med">6.5 Medium</span><span class="vec">AV:A/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H</span></td><td data-label="Retest">Fixed</td></tr>
         </tbody>
       </table>
     </div>
-    <div class="cta"><a class="btn solid" href="/reports/ics-sim.html">Read the full report</a></div>
-    <p class="note">This is a lab assessment: the attacks run inside the simulator through the project's own scenario runner. It shows how I scope, test, rate, evidence and report. It is not a claim about a real plant.</p>
-  </section>
+    <div class="after">
+      <a class="btn primary" href="/reports/ics-sim.html">Read the report</a>
+      <a class="btn" href="/reports/ics-sim.pdf">Download PDF</a>
+    </div>
+    <p class="note">This is a lab assessment. The attacks run inside the simulator through the project's own scenario runner, so it shows how I scope, test, rate and report, not how I would break a real plant.</p>
+  </div>
+</section>
 
-  <section id="research">
-    <div class="sec-h"><h2>Research project</h2></div>
-    <p class="sec-sub">My final-year project is a purple-team study, so it needs both sides.</p>
-    <div class="poster reveal">
-      <span class="flag">in progress &middot; due April 2027</span>
-      <h3>Skyguard Purple Lab: testing Suricata detection of attacks on drone command links</h3>
-      <p><strong>A simulated lab</strong> with an ArduPilot drone, a ground station, attacker and relay hosts and a Suricata sensor on an isolated network, with ground-truth logging so every alert can be scored.</p>
-      <ul class="rqs">
-        <li><b>RQ1</b>How well do default Suricata rules detect flooding, command injection and spoofed position messages, and how fast?</li>
-        <li><b>RQ2</b>Do custom MAVLink rules improve detection, and by how much?</li>
-        <li><b>RQ3</b>What is the false-alarm rate of each rule set on normal mission traffic?</li>
-        <li><b>RQ4</b>Do published results on recorded relay captures (Shadow-GCS dataset) hold in live traffic?</li>
+<section id="projects">
+  <div class="wide">
+    <h2>Projects</h2>
+
+    <article class="case">
+      <div>
+        <p class="when"><span>14 to 19 Nov 2026</span><span>Industrial control systems</span></p>
+        <h3>ICS attack simulator</h3>
+        <p class="sum">A simulated water plant attacked by eight ATT&amp;CK for ICS scenarios.</p>
+        <dl>
+          <dt>Attack</dt><dd>Raise the caustic setpoint, replay the operator's view, rewrite PLC logic, flood Modbus.</dd>
+          <dt>Defence</dt><dd>Seven switchable mitigations, each re-run against every scenario.</dd>
+          <dt>Result</dt><dd>405 runs: no single control covers everything.</dd>
+          <dt>Limit</dt><dd>Simplified physics and a scripted operator.</dd>
+        </dl>
+        <details>
+          <summary>How it works</summary>
+          <p>A PLC with an independent safety system speaks Modbus/TCP to an operator HMI. Each scenario is mapped to ATT&amp;CK for ICS and run against a baseline, then again with each mitigation switched on, over five random seeds.</p>
+          <p>A range check stops the Oldsmar-style write but not logic changes or replayed telemetry. That is the finding the report is built around.</p>
+        </details>
+        <p class="tech">Python, Modbus/TCP, FastAPI</p>
+        <p class="links"><a href="/reports/ics-sim.html">Read the report</a><a href="https://github.com/ikerscode/ics-sim">View code on GitHub</a></p>
+      </div>
+      <figure class="exhibit">
+<pre tabindex="0">mitigations: none
+  outcome: hazard occurred
+  quality compliance 18.82%
+mitigations: eng_limits
+  outcome: prevented
+  Engineering limit rejected write
+  NAOH_SP=11100 ppm (range 0-200)</pre>
+        <figcaption>Exhibit 1: <code>python -m icssim run-scenario oldsmar --fast</code>, then with <code>--mitigations eng_limits</code>. Output reflowed to fit.</figcaption>
+      </figure>
+    </article>
+
+    <article class="case">
+      <div>
+        <p class="when"><span>18 Nov 2026</span><span>Drone command-link detection</span></p>
+        <h3>MAVLink NIDS demo</h3>
+        <p class="sum">Custom Suricata rules for a drone command link, compared with the stock rule set.</p>
+        <dl>
+          <dt>Attack</dt><dd>Flood the link, inject a command that looks like the ground station's, or feed fake GPS positions.</dd>
+          <dt>Defence</dt><dd>35 rules written from the protocol specification. Replay is offline, so no attack traffic is sent.</dd>
+          <dt>Result</dt><dd>On four synthetic captures the stock rules stayed silent and the custom rules fired as expected.</dd>
+          <dt>Limit</dt><dd>The captures are synthetic and the rules hard-code lab addresses. Live testing is my research project.</dd>
+        </dl>
+        <details>
+          <summary>How it works</summary>
+          <p>Suricata replays a recorded capture twice, once with the Emerging Threats rules and once with mine, and the page shows which rules fired. On a link without message signing, each of the three attack classes leaves a payload pattern that a rule can match.</p>
+        </details>
+        <p class="tech">Suricata, MAVLink, Docker, Python</p>
+        <p class="links"><a href="https://github.com/ikerscode/mavlink-nids-demo">View code on GitHub</a></p>
+      </div>
+      <figure class="exhibit">
+<pre tabindex="0">alert udp !10.77.0.20 any -> any any (
+  msg:"SG-MAVLINK injection: COMMAND_LONG
+    (v2) from a source that is not the
+    ground station";
+  content:"|fd|"; startswith;
+  content:"|4c 00 00|"; offset:7; depth:3;
+  sid:9100201; ... )</pre>
+        <figcaption>Exhibit 2: one of the 35 custom rules, wrapped and trimmed.</figcaption>
+      </figure>
+    </article>
+
+    <article class="case">
+      <div>
+        <p class="when"><span>14 to 18 Nov 2026</span><span>Attacker behaviour</span></p>
+        <h3>Honeypot network</h3>
+        <p class="sum">SSH, Telnet, HTTP and banner sensors that look vulnerable and send signed events to a collector.</p>
+        <dl>
+          <dt>Attack</dt><dd>Default-credential lists, password spraying and exploit probes for known CVEs, grouped into campaigns.</dd>
+          <dt>Defence</dt><dd>Sensors have no route out, and events are HMAC-signed with replay protection.</dd>
+          <dt>Result</dt><dd>On a 14-day traffic simulator it separated 5 campaigns and flagged 1,074 of 1,230 HTTP requests.</dd>
+          <dt>Limit</dt><dd>Never exposed to the internet, so the numbers show the analysis works, not what real attackers do.</dd>
+        </dl>
+        <details>
+          <summary>How it works</summary>
+          <p>Each sensor imitates a vulnerable service, records what is tried and ships the events to a collector that stores and analyses them. A simulator generates the traffic, because a honeypot on localhost never sees a real attacker.</p>
+        </details>
+        <p class="tech">Python, SQLite, Docker, HMAC</p>
+        <p class="links"><a href="https://github.com/ikerscode/honeypot-net">View code on GitHub</a></p>
+      </div>
+      <figure class="exhibit">
+<pre tabindex="0">auth attempts: 6958 from 305 IPs
+brute-force flagged: 112
+campaigns: 5
+  C01 IoT botnet (Mirai-style)
+      175 IPs, 910 attempts
+  C02 botnet credential stuffing
+      112 IPs, 5732 attempts
+exploit attempts: 1074 of 1230 HTTP requests</pre>
+        <figcaption>Exhibit 3: <code>python -m honeypot analyze</code> on simulated data, reflowed.</figcaption>
+      </figure>
+    </article>
+
+    <article class="case">
+      <div>
+        <p class="when"><span>14 to 18 Nov 2026</span><span>Malware analysis</span></p>
+        <h3>Malware lab</h3>
+        <p class="sum">Static analysis, then detonation in a no-network Docker sandbox, with indicators, ATT&amp;CK mapping and YARA output.</p>
+        <dl>
+          <dt>Attack</dt><dd>Read what a beacon does: jittered callbacks on a non-standard port, DNS lookups, persistence.</dd>
+          <dt>Defence</dt><dd>Output is IOCs, ATT&amp;CK techniques and a YARA rule, in Markdown, HTML, JSON and STIX 2.1.</dd>
+          <dt>Result</dt><dd>The C2 training specimen scored 24 (benign) statically and 94 (malicious) after detonation.</dd>
+          <dt>Limit</dt><dd>The lab ships training simulators, not real malware.</dd>
+        </dl>
+        <details>
+          <summary>How it works</summary>
+          <p>A sample is hashed, stored read-only and analysed statically. If the format allows, it then runs in a read-only container with no network and dropped capabilities while strace records what it does.</p>
+        </details>
+        <p class="tech">Python, YARA, strace, Docker</p>
+        <p class="links"><a href="https://github.com/ikerscode/malware-lab">View code on GitHub</a></p>
+      </div>
+      <figure class="exhibit">
+<pre tabindex="0">verdict : MALICIOUS  score=94
+          category=backdoor-c2
+dynamic : yes, 5.426 s, 58 events
+[high] Beaconing to 203.0.113.50:8443,
+       every 0.853 s, jitter 5.8%
+[medium] YARA C2_Beacon_Loop
+ATT&amp;CK  : T1029, T1071, T1571, +2 more</pre>
+        <figcaption>Exhibit 4: <code>python -m malwarelab analyze specimens/c2_beacon.py</code>, trimmed.</figcaption>
+      </figure>
+    </article>
+
+    <div class="also">
+      <h3>Also built</h3>
+      <ul>
+        <li><a href="https://github.com/ikerscode/threat-intel">threat-intel</a>: correlates public threat feeds and answers pivot queries offline.</li>
+        <li><a href="https://github.com/ikerscode/ai-ids">ai-ids</a>: ML intrusion detection that explains alerts and documents its misses.</li>
+        <li><a href="https://github.com/ikerscode/purple-path">purple-path</a>: browser game teaching ethical hacking terms, defence first.</li>
+        <li><a href="https://github.com/ikerscode/seclab">seclab</a>: portal that starts and monitors the labs above.</li>
+        <li><a href="https://github.com/ikerscode/Gullwing">Gullwing</a>: offline security audit and tuning console with reversible changes.</li>
       </ul>
-      <p>The lab and scoring tools are built and tested. Ethics approval comes before any attack work, and thresholds are fixed before any test run. There are no results yet and I will not claim any until the experiments are done. The custom rules are public in the <a href="https://github.com/ikerscode/mavlink-nids-demo">MAVLink NIDS demo</a>.</p>
-      <div class="timeline">
-        <div class="done"><b>Proposal</b>submitted 16 Nov</div>
-        <div class="now"><b>Preparation</b>lab, tooling, ethics</div>
-        <div><b>Pilot and rules</b>Dec to Jan</div>
-        <div><b>Experiments and write-up</b>Feb to Apr</div>
-      </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section id="method">
-    <div class="sec-h"><h2>How I work</h2></div>
-    <p class="sec-sub">A hunting bat changes its call as it closes in: slow, long calls while searching, faster ones on approach, then a terminal buzz. The spectrogram below is drawn from that pattern, and it is how I run an engagement.</p>
-    <canvas id="spec" role="img" aria-label="Spectrogram of a bat hunt: calls get faster and shorter from left to right"></canvas>
+<section id="research">
+  <div class="wide">
+    <h2>Research project</h2>
+    <h3>Skyguard Purple Lab: testing Suricata detection of attacks on drone command links</h3>
+    <p class="muted small">Final-year project, in progress, due April 2027</p>
+    <p>A simulated lab with an ArduPilot drone, a ground station, attacker and relay hosts and a Suricata sensor on an isolated network, with ground-truth logging so every alert can be scored.</p>
+    <ul class="rq">
+      <li><b>RQ1</b>How well do default Suricata rules detect flooding, command injection and spoofed position messages, and how fast?</li>
+      <li><b>RQ2</b>Do custom MAVLink rules improve detection, and by how much?</li>
+      <li><b>RQ3</b>What is the false-alarm rate of each rule set on normal mission traffic?</li>
+      <li><b>RQ4</b>Do published results on recorded relay captures (Shadow-GCS dataset) hold in live traffic?</li>
+    </ul>
+    <p>The lab and scoring tools are built and tested. Ethics approval comes before any attack work, and thresholds are fixed before any test run. There are no results yet, and I won't claim any until the experiments are done.</p>
+    <p class="timeline-line">Proposal submitted 16 Nov 2026. Now: preparation. Next: pilot and rules (Dec to Jan), then experiments and write-up (Feb to Apr 2027).</p>
+  </div>
+</section>
+
+<section id="method">
+  <div class="wide">
+    <h2>How I work</h2>
+    <p class="lead">A hunting bat changes its call as it closes in: slow, long calls while searching, faster ones on approach, then a rapid terminal buzz. That is also how I run an engagement.</p>
+    <figure class="strip">
+      <canvas id="spec2" role="img" aria-label="Spectrogram of a bat hunt in three phases: search, approach and terminal buzz."></canvas>
+    </figure>
     <div class="phases">
-      <div class="phase reveal">
-        <div class="bat-name">Search</div>
-        <div class="pt-name">recon and scoping</div>
-        <p>Read the scope and rules of engagement. Passive first, then active. Map what exists before touching any of it.</p>
-      </div>
-      <div class="phase reveal">
-        <div class="bat-name">Approach</div>
-        <div class="pt-name">enumeration and analysis</div>
-        <p>Services, versions, users, paths. Work out what is actually exploitable and why.</p>
-      </div>
-      <div class="phase reveal">
-        <div class="bat-name">Terminal buzz</div>
-        <div class="pt-name">action and report</div>
-        <p>Short and precise, only inside scope. Then write it up so someone else can reproduce it and fix it.</p>
-      </div>
+      <div><h3>Search</h3><span class="muted">Recon and scoping</span><p>Read the scope and rules of engagement. Passive first, then active. Map what exists before touching it.</p></div>
+      <div><h3>Approach</h3><span class="muted">Enumeration and analysis</span><p>Services, versions, users, paths. Work out what is exploitable and why.</p></div>
+      <div><h3>Terminal buzz</h3><span class="muted">Action and report</span><p>Short and precise, only inside scope. Then write it up so someone else can reproduce and fix it.</p></div>
     </div>
-    <div class="rules reveal">
+    <div class="rules">
       <h3>Rules I work by</h3>
       <ol>
-        <li><strong>Scope and authorisation come first.</strong> No scope, no test.</li>
-        <li><strong>I only test what I own or have written permission to test:</strong> my own lab, Hack The Box and CTFs.</li>
-        <li><strong>I write down what I did,</strong> in an order someone else can follow.</li>
-        <li><strong>A finding without a fix is half a report.</strong></li>
+        <li>Scope and authorisation come first. No scope, no test.</li>
+        <li>I only test what I own or have written permission to test: my own lab, Hack The Box and CTFs.</li>
+        <li>I write down what I did, in an order someone else can follow.</li>
+        <li>A finding without a fix is half a report.</li>
       </ol>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section id="toolkit">
-    <div class="sec-h"><h2>Toolkit</h2></div>
-    <p class="sec-sub">Each item links to where I used it.</p>
+<section id="toolkit">
+  <div class="wide">
+    <h2>Toolkit</h2>
+    <p class="lead">Each item links to where I used it.</p>
     <div class="cols">
-      <div class="box reveal"><h3>attack and recon</h3><ul>
-        <li>ATT&amp;CK and ATT&amp;CK for ICS, in <a href="https://github.com/ikerscode/ics-sim">ics-sim</a></li>
-        <li>Modbus/TCP and MAVLink, in <a href="https://github.com/ikerscode/mavlink-nids-demo">mavlink-nids-demo</a></li>
-        <li>tshark and scapy, in <a href="https://github.com/ikerscode/ai-ids">ai-ids</a></li>
+      <div><h3>Attack and recon</h3><ul>
+        <li>ATT&amp;CK and ATT&amp;CK for ICS: <a href="https://github.com/ikerscode/ics-sim">ics-sim</a></li>
+        <li>Modbus/TCP and MAVLink: <a href="https://github.com/ikerscode/mavlink-nids-demo">mavlink-nids-demo</a></li>
+        <li>tshark and scapy: <a href="https://github.com/ikerscode/ai-ids">ai-ids</a></li>
         <li>Training: Hack The Box</li>
       </ul></div>
-      <div class="box reveal"><h3>detection and analysis</h3><ul>
-        <li>Suricata rules, in <a href="https://github.com/ikerscode/mavlink-nids-demo">mavlink-nids-demo</a></li>
-        <li>YARA and strace, in <a href="https://github.com/ikerscode/malware-lab">malware-lab</a></li>
-        <li>STIX 2.1 and public feeds, in <a href="https://github.com/ikerscode/threat-intel">threat-intel</a></li>
-        <li>Attack-campaign analysis, in <a href="https://github.com/ikerscode/honeypot-net">honeypot-net</a></li>
+      <div><h3>Detection and analysis</h3><ul>
+        <li>Suricata rules: <a href="https://github.com/ikerscode/mavlink-nids-demo">mavlink-nids-demo</a></li>
+        <li>YARA and strace: <a href="https://github.com/ikerscode/malware-lab">malware-lab</a></li>
+        <li>STIX 2.1 and public feeds: <a href="https://github.com/ikerscode/threat-intel">threat-intel</a></li>
+        <li>Campaign analysis: <a href="https://github.com/ikerscode/honeypot-net">honeypot-net</a></li>
       </ul></div>
-      <div class="box reveal"><h3>build</h3><ul>
+      <div><h3>Build</h3><ul>
         <li>Python, Bash, SQL</li>
         <li>FastAPI, SQLite, Docker</li>
         <li>Git and GitHub Actions CI</li>
-        <li>Tests on everything I publish</li>
+        <li>Tests and CI on the four main projects</li>
       </ul></div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section id="contact">
-    <div class="sec-h"><h2>Contact</h2></div>
-    <p class="shot reveal">Take a chance on me.</p>
-    <p class="lede reveal">I am looking for a junior penetration testing or security role, or an internship, with a team that will teach me. I learn fast, I document everything and I own my mistakes.</p>
-    <div class="contact reveal">
-      <a href="mailto:liamnichele@icloud.com">Email <span>liamnichele@icloud.com</span></a>
-      <a href="https://www.linkedin.com/in/liam-nichele-920a0022a">LinkedIn <span>liam-nichele</span></a>
-      <a href="https://github.com/ikerscode">GitHub <span>github.com/ikerscode</span></a>
-      <a href="/cv/Liam-Nichele-CV.pdf">CV <span>PDF</span></a>
-    </div>
-  </section>
+<section id="contact">
+  <div class="wide">
+    <h2>Let's talk</h2>
+    <p class="lead">I'm looking for a junior penetration testing or security role, or an internship, with a team that will teach me. I document everything and I own my mistakes.</p>
+    <ul class="contact-list">
+      <li><a href="mailto:liamnichele@icloud.com">Email <span>liamnichele@icloud.com</span></a></li>
+      <li><a href="https://www.linkedin.com/in/liam-nichele-920a0022a">LinkedIn <span>liam-nichele</span></a></li>
+      <li><a href="https://github.com/ikerscode">GitHub <span>github.com/ikerscode</span></a></li>
+      <li><a href="/cv/Liam-Nichele-CV.pdf">CV <span>PDF</span></a></li>
+    </ul>
+  </div>
+</section>
 
-</div>
 </main>
 
 <footer>
-  <div class="wrap">
+  <div class="wide">
     <span>Liam Nichele</span>
-    <span>No trackers, no cookies, no frameworks. Fonts: Inter, Anton, Fira Code (OFL).</span>
+    <span>No trackers, no cookies, no frameworks. Fonts: Source Serif 4 and JetBrains Mono (OFL).</span>
   </div>
 </footer>
 </body>
