@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="theme-color" content="#0d0d0f" />
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'none'; style-src 'self'; img-src 'self' data:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none';" />
+<title>Sample pentest report: ICS simulator | Liam Nichele</title>
+<meta name="description" content="Sample penetration test report on my own water-plant ICS simulator: scope, method, four findings with CVSS scores, evidence, reproduction steps, remediation and retests." />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="stylesheet" href="/css/site.css" />
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <a class="brand" href="/" aria-label="Liam Nichele, home">
+      <svg viewBox="0 0 60 36" aria-hidden="true"><path d="M30 6 32.5 1.5 33.5 9Q38 8 43 4Q52 3 58 12Q54 11 50 13Q50 18 46 22Q44 18 40 19Q39 25 35 30Q33 22 30 34Q27 22 25 30Q21 25 20 19Q16 18 14 22Q10 18 10 13Q6 11 2 12Q8 3 17 4Q22 8 26.5 9L27.5 1.5Z"/></svg>
+      Liam Nichele
+    </a>
+    <nav aria-label="Report"><a href="/#projects">Projects</a><a href="/#contact">Contact</a></nav>
+  </div>
+</header>
+
+<main class="rpt"><div class="wrap">
+
+<div class="rpt-head">
+  <span class="banner">sample report &middot; lab target &middot; no third-party systems</span>
+  <h1>Penetration test report: water-plant ICS simulator</h1>
+  <table class="tbl"><tbody>
+    <tr><td>Tester</td><td>Liam Nichele</td></tr>
+    <tr><td>Date</td><td>19 November 2026</td></tr>
+    <tr><td>Version</td><td>1.0, public sample</td></tr>
+    <tr><td>Target</td><td>ics-sim, commit <code>a1d0787</code>, running on localhost (<a href="https://github.com/ikerscode/ics-sim">github.com/ikerscode/ics-sim</a>)</td></tr>
+  </tbody></table>
+</div>
+
+<h2>1. Executive summary</h2>
+<p>I assessed a simulated drinking-water treatment works: a PLC and an independent safety system (SIS) speaking Modbus/TCP, with an operator HMI, an engineering workstation and an office network, laid out on Purdue levels. I ran four attack scenarios against it with no protective controls and found <strong>four weaknesses, three rated High and one Medium</strong>. Each was fixed by turning on one control and re-running the same scenario with the same random seed.</p>
+<p>The main lesson is that <strong>no single control covers everything</strong>. A range check on the PLC stopped the Oldsmar-style setpoint attack but did nothing against reprogramming or replayed telemetry. A Modbus firewall stopped the flood and the reprogramming but not an attack from an allowed host. The SIS prevented every hazard it has a sensor for, but did it by shutting the outlet, which turned a quality incident into a supply outage.</p>
+<div class="tblwrap"><table class="tbl">
+  <thead><tr><th>ID</th><th>Finding</th><th>CVSS 3.1</th><th>Fix verified in retest</th></tr></thead>
+  <tbody>
+    <tr><td>F1</td><td>PLC program can be rewritten from an unlisted host</td><td><span class="sev">8.2 High</span></td><td>Modbus firewall source allowlist: prevented</td></tr>
+    <tr><td>F2</td><td>Operator view can be replayed while the process is attacked</td><td><span class="sev">8.0 High</span></td><td>Telemetry integrity check detects at 10 min; SIS limits damage</td></tr>
+    <tr><td>F3</td><td>Setpoint writes accepted without range validation</td><td><span class="sev">7.7 High</span></td><td>PLC engineering limits: prevented</td></tr>
+    <tr><td>F4</td><td>Modbus flood from the IT zone exhausts the PLC</td><td><span class="sev med">6.5 Medium</span></td><td>Modbus firewall allowlist: prevented</td></tr>
+  </tbody></table></div>
+
+<h2>2. Scope and rules of engagement</h2>
+<ul>
+  <li><strong>In scope:</strong> the ics-sim simulator at commit <code>a1d0787</code> on my own machine: PLC-01, SIS-01, HMI-01, EWS-01 and the simulated network zones.</li>
+  <li><strong>Out of scope:</strong> everything else. No real network, host or person was tested or scanned.</li>
+  <li><strong>Authorisation:</strong> I own and wrote the system, so tester and owner are the same person. A real engagement would have written authorisation from the asset owner before any testing.</li>
+  <li><strong>Method of attack:</strong> the scenarios run inside the simulator through its own scenario runner. Source addresses are labels inside the simulation. They never open sockets to anything else.</li>
+  <li><strong>Test window:</strong> each run simulates 3 hours with the attack starting at +30 minutes, seed 1. A separate 5-seed matrix (405 runs) is used to check that results are stable.</li>
+</ul>
+
+<h2>3. Method</h2>
+<ol>
+  <li><strong>Threat model:</strong> I picked eight scenarios mapped to MITRE ATT&amp;CK for ICS. This report covers the four with the clearest remediation lessons.</li>
+  <li><strong>Baseline:</strong> every attack run is compared with a run on the same seed and the same controls with no attack.</li>
+  <li><strong>Attack run:</strong> no mitigations, so the raw weakness is visible.</li>
+  <li><strong>Rating:</strong> CVSS v3.1 base score. I computed the scores with a calculator I checked against published example vectors (9.8, 10.0 and 6.1 all matched). CVSS v3.1 has no safety metric, so the physical consequence is described separately for each finding.</li>
+  <li><strong>Retest:</strong> the same scenario and seed with one mitigation switched on, to verify the fix rather than assume it.</li>
+</ol>
+
+<h2>4. Findings</h2>
+
+<div class="finding" id="f1">
+  <h3>F1. PLC program can be rewritten from an unlisted host <span class="sev">8.2 High</span></h3>
+  <p class="vec">CVSS:3.1/AV:A/AC:L/PR:N/UI:N/S:C/C:N/I:H/A:L &middot; ATT&amp;CK for ICS: T0845, T0843, T0889, T0878</p>
+  <h4>description</h4>
+  <p>The PLC accepts a vendor program upload and download (function code 90) from a host on the supervisory network without checking who is asking. An attacker changes the intake tank hysteresis thresholds to 4.9 m and 5.6 m and suppresses the RAW_HI alarm, so the raw tank overflows with no alarm.</p>
+  <h4>evidence (run 20261119-070422-e67667, no mitigations)</h4>
+<pre>PLC logic tampering: altered hysteresis causes raw tank overflow
+mitigations: none -> outcome: <b>hazard occurred</b>
+  baseline: availability 100.0% | safety score 100.0 | hazards: none
+  attack:   availability 100.0% | safety score 85.0  | hazards: <i>tank_overflow</i>
+  attack:   time to hazard: tank_overflow 61.8 min</pre>
+  <h4>steps to reproduce</h4>
+<pre>cd ics-sim
+.venv/bin/python -m icssim run-scenario logic_tamper --fast</pre>
+  <h4>impact</h4>
+  <p>Loss of containment of raw water roughly 62 minutes after the attack, with the alarm that would warn the operator suppressed.</p>
+  <h4>remediation</h4>
+  <ul>
+    <li>Allow programming function codes only from the engineering workstation (source allowlist at a Modbus firewall).</li>
+    <li>Alert on PLC program change (checksum monitoring), and disable remote programming in normal operation where the PLC supports it.</li>
+  </ul>
+  <h4>retest</h4>
+<pre>logic_tamper + firewall   (run 20261119-070643-58e4dc)
+mitigations: firewall -> outcome: <b>prevented</b>
+  firewall  detected after 0.0 min: Firewall blocked 1 request(s) from 10.10.2.66: source not in allowlist
+
+logic_tamper + detector   (run 20261119-070438-b4c391)
+mitigations: detector -> outcome: <b>hazard occurred</b>
+  detector  detected after 1.5 min: Anomaly [program_crc]: PLC program CRC changed 41d99cd5 -> 5302ae9b</pre>
+  <p>The firewall prevents it. The detector spots the change after 1.5 minutes but only detects, so the overflow still happens unless someone acts. Across 5 seeds, segmentation and engineering limits did not stop this attack either.</p>
+</div>
+
+<div class="finding" id="f2">
+  <h3>F2. Operator view can be replayed while the process is attacked <span class="sev">8.0 High</span></h3>
+  <p class="vec">CVSS:3.1/AV:A/AC:H/PR:N/UI:N/S:C/C:N/I:H/A:H &middot; ATT&amp;CK for ICS: T0830, T0832, T0815, T0855, T0858, T0831, T0879</p>
+  <h4>description</h4>
+  <p>Telemetry from the PLC to the HMI is not authenticated or sequenced. An attacker in a man-in-the-middle position records normal readings and replays them to the HMI while closing the filter feed and forcing pump P-201 into manual mode. The operator sees a healthy plant while the pump runs dry.</p>
+  <h4>evidence (run 20261119-070419-6e4fa6, no mitigations)</h4>
+<pre>Replay / masking of the HMI view while the process is manipulated (Stuxnet-style)
+mitigations: none -> outcome: <b>hazard occurred</b>
+  baseline: availability 100.0% | safety score 100.0 | hazards: none
+  attack:   availability 39.38%  | safety score 70.0  | hazards: <i>pump_damage, supply_outage</i>
+  attack:   time to hazard: supply_outage 42.5 min, pump_damage 43.5 min</pre>
+  <h4>steps to reproduce</h4>
+<pre>.venv/bin/python -m icssim run-scenario replay_masking --fast</pre>
+  <h4>impact</h4>
+  <p>Pump damage and a supply outage about 43 minutes after the attack, with the attended operator model blind to it for the whole period.</p>
+  <h4>remediation</h4>
+  <ul>
+    <li>Add a sequence number and an HMAC to telemetry so replayed frames are rejected.</li>
+    <li>Tie detection to a response: an alert with nobody acting on it does not protect the pump.</li>
+    <li>Keep the independent SIS, which does not depend on the HMI view.</li>
+  </ul>
+  <h4>retest</h4>
+<pre>replay_masking + integrity   (run 20261119-070435-14b383)
+  integrity  detected after 10.0 min: Telemetry integrity: sequence 900 not newer than 1199, replayed data
+  outcome: <b>hazard occurred</b> (detection only)
+
+replay_masking + sis   (run 20261119-070645-a47925)
+  sis  detected after 39.9 min: SIS TRIP: reservoir low-low level; safe state (dosing off, intake off, outlet closed)
+  outcome: <b>prevented</b> (pump damage) | supply_outage still at 41.0 min, availability 38.81%</pre>
+  <p>The integrity check catches the replay the moment it starts, but detection alone does not stop the hazard. The SIS prevents the pump damage and not the outage. Neither one fully closes the finding, which is why the recommendation is a combination plus a response procedure. Note that real PLCs rarely offer telemetry HMAC, so in practice this control would sit in a gateway.</p>
+</div>
+
+<div class="finding" id="f3">
+  <h3>F3. Setpoint writes accepted without range validation <span class="sev">7.7 High</span></h3>
+  <p class="vec">CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:C/C:N/I:H/A:N &middot; ATT&amp;CK for ICS: T0822, T0859, T0823, T0836</p>
+  <h4>description</h4>
+  <p>A remote-access session on the HMI PC, protected by a shared password, is taken over and used to write a sodium hydroxide setpoint of 11,100 ppm. The PLC accepts any value, including one far outside the safe range. The scenario follows the publicly reported 2021 Oldsmar incident.</p>
+  <h4>evidence (run 20261119-070416-6fd2ea, no mitigations)</h4>
+<pre>Oldsmar-style caustic setpoint raise through a remote HMI session
+mitigations: none -> outcome: <b>hazard occurred</b>
+  baseline: quality compliance 100.0% | safety score 100.0 | hazards: none
+  attack:   quality compliance 18.82% | safety score 55.0 | hazards: <i>caustic_overdose, ph_out_of_range</i>
+  attack:   time to hazard: ph_out_of_range 11.4 min, caustic_overdose 41.4 min
+  non-compliant water delivered: 632.1 m3 | max pH 10.88 | max sodium 188.1 mg/L</pre>
+  <h4>steps to reproduce</h4>
+<pre>.venv/bin/python -m icssim run-scenario oldsmar --fast</pre>
+  <h4>impact</h4>
+  <p>Only 18.8% of the water delivered met quality limits, and pH left its allowed range within 12 minutes. Availability stayed at 100%, which is what makes this attack hard to notice from supply alone.</p>
+  <h4>remediation</h4>
+  <ul>
+    <li>Enforce engineering limits in the PLC so an out-of-range write is rejected whatever its source.</li>
+    <li>Replace the shared remote-access password with named accounts and multi-factor authentication, and require approval for remote sessions.</li>
+  </ul>
+  <h4>retest</h4>
+<pre>oldsmar + eng_limits   (run 20261119-070433-508000)
+mitigations: eng_limits -> outcome: <b>prevented</b>
+  eng_limits  detected after 1.0 min: Engineering limit rejected write NAOH_SP=11100 ppm (range 0-200)</pre>
+  <p>The write is rejected after 1.0 minute and no hazard occurs. The firewall and segmentation did nothing here (5 of 5 seeds), because the attack arrives from a host that is allowed to talk to the PLC.</p>
+</div>
+
+<div class="finding" id="f4">
+  <h3>F4. Modbus flood from the IT zone exhausts the PLC <span class="sev med">6.5 Medium</span></h3>
+  <p class="vec">CVSS:3.1/AV:A/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H &middot; ATT&amp;CK for ICS: T0814, T0815, T0827, T0826</p>
+  <h4>description</h4>
+  <p>The PLC answers Modbus requests from the office network at any rate. A host in the IT zone sends 2,000 requests per second, which starves communications, trips the PLC watchdog and drops the outputs.</p>
+  <h4>evidence (run 20261119-070640-e47ef5, no mitigations)</h4>
+<pre>Modbus flood causing loss of view and loss of control
+mitigations: none -> outcome: <b>hazard occurred</b>
+  baseline: availability 100.0% | safety score 100.0 | hazards: none
+  attack:   availability 16.7%   | safety score 90.0  | hazards: <i>supply_outage</i>
+  attack:   time to hazard: supply_outage 1.4 min</pre>
+  <h4>steps to reproduce</h4>
+<pre>.venv/bin/python -m icssim run-scenario modbus_dos --fast</pre>
+  <h4>impact</h4>
+  <p>Loss of view and control and a supply outage within 84 seconds, with availability down to 16.7%. No contamination, so I rated it Medium, but for a real works an outage is a serious event.</p>
+  <h4>remediation</h4>
+  <ul>
+    <li>Segment the IT zone so it cannot reach the PLC at all.</li>
+    <li>Put a source allowlist and a rate limit in front of the PLC.</li>
+  </ul>
+  <h4>retest</h4>
+<pre>modbus_dos + firewall   (run 20261119-070441-f82361)
+mitigations: firewall -> outcome: <b>prevented</b>
+  firewall  detected after 0.0 min: Firewall blocked 1000 request(s) from 192.168.10.37: source not in allowlist</pre>
+  <p>Segmentation also prevents it. The SIS cannot help, because the attack never touches the process it protects.</p>
+</div>
+
+<h2>5. What held up</h2>
+<ul>
+  <li>45 baseline runs (no attack, every control column, 5 seeds) raised no false alerts and no hazards.</li>
+  <li>The SIS prevented every hazard it has a sensor for in the scenarios above, though sometimes at the cost of availability (22% to 58% in those runs).</li>
+  <li>Results were stable across seeds: no cell of the 405-run matrix changed outcome between seeds. The seed only varies process and sensor noise, so this shows robustness to noise, not to a different operator.</li>
+</ul>
+
+<h2>6. Limitations</h2>
+<ul>
+  <li>This is a simulator with simplified physics and a scripted operator. Times to hazard show mechanisms and relative differences, not predictions for a real works.</li>
+  <li>The attacks run inside the simulator through its scenario runner. I did not write novel exploits, and nothing here is a claim about real PLCs or networks.</li>
+  <li>I rated the findings myself. A second scorer would probably disagree on some metrics, particularly attack complexity on F2.</li>
+  <li>Only one mitigation was switched on per retest. Real remediation is layered, and the 405-run matrix in the <a href="https://github.com/ikerscode/ics-sim/blob/main/docs/MATRIX.md">repository</a> shows the combinations.</li>
+</ul>
+
+<h2>Appendix: environment and run IDs</h2>
+<p>Linux, Python virtual environment, runs executed at low priority with <code>--fast</code>, seed 1. Reports for every run are generated by the tool under <code>data/reports/</code>. Run IDs used above: 070416-6fd2ea, 070419-6e4fa6, 070422-e67667, 070433-508000, 070435-14b383, 070438-b4c391, 070441-f82361, 070640-e47ef5, 070643-58e4dc, 070645-a47925 (all 20261119).</p>
+
+<a class="back" href="/">&larr; Back to portfolio</a>
+
+</div></main>
+
+<footer><div class="wrap"><span>Liam Nichele</span><span>Sample report on my own lab system.</span></div></footer>
+</body>
+</html>
